@@ -1,0 +1,1 @@
+﻿public enum EPracticas { Biodecodificación, Reiki, Tarot };
