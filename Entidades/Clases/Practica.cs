@@ -1,13 +1,16 @@
-﻿using System;
+﻿using Entidades.Archivos;
+using Entidades.Excepciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Entidades.Clases
 {
 
-    public class Practica
+    public class Practica : IArchivos<Practica>
     {
         private static Dictionary<EPracticas, double> practicas;
 
@@ -33,5 +36,34 @@ namespace Entidades.Clases
         public string PracticaNombre { get => practicaNombre; set => practicaNombre = value; }
         public double Precio { get => precio; set => precio = value; }
         public int IdPractica { get => idPractica; set => idPractica = value; }
+        public string RutaArchivo { get => Path.Combine(".\\", "Practicas.json"); set => RutaArchivo = value; }
+
+        public List<Practica> CargarArchivoJson()
+        {
+            List<Practica> listaPracticas = new List<Practica>();
+            using (StreamReader sr = new StreamReader(RutaArchivo))
+            {
+                string listaJson = sr.ReadToEnd();
+                listaPracticas = JsonSerializer.Deserialize<List<Practica>>(listaJson);
+            }
+            if (listaPracticas is null)
+            {
+                throw new NoPudoLeerElArchivoException();
+            }
+            return listaPracticas;
+        }
+
+        public bool GuardarArchivoJson(List<Practica> list)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+
+            using (StreamWriter sw = new StreamWriter(RutaArchivo))
+            {
+                string listaJson = JsonSerializer.Serialize(list, options);
+                sw.WriteLine(listaJson);
+            }
+            return true;
+        }
     }
 }

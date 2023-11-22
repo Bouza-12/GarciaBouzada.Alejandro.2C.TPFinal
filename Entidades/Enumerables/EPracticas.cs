@@ -1,1 +1,1 @@
-﻿public enum EPracticas { Biodecodificación, Reiki, Tarot };
+﻿public enum EPracticas { Biodecodificación, Reiki, Tarot, Sakhmajat, Numerologia, Carta_Natal };

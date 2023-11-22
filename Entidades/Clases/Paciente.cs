@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Entidades.Archivos;
+using Entidades.Excepciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Entidades.Clases
+namespace Entidades.Clases 
 {
-    public class Paciente : Persona
+    public class Paciente : Persona, IArchivos<Paciente>
     {
         private int idPaciente;
         private DateTime? fechaNacimiento;
@@ -58,6 +61,37 @@ namespace Entidades.Clases
         public override string ToString()
         {
             return $"ID: {this.idPaciente} => {this.NombreCompleto}, Edad: {this.Edad}";
+        }
+
+        public static string RutaArchivo { get => Path.Combine(".\\", "Pacientes.json"); set => RutaArchivo = value; }
+
+
+        public bool GuardarArchivoJson(List<Paciente> list)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+
+            using (StreamWriter sw = new StreamWriter(RutaArchivo))
+            {
+                string listaJson = JsonSerializer.Serialize(list, options);
+                sw.WriteLine(listaJson);
+            }
+            return true;
+        }
+
+        public List<Paciente> CargarArchivoJson()
+        {
+            List<Paciente> listaPacientes = new List<Paciente>();
+            using (StreamReader sr = new StreamReader(RutaArchivo))
+            {
+                string listaJson = sr.ReadToEnd();
+                listaPacientes = JsonSerializer.Deserialize<List<Paciente>>(listaJson);
+            }
+            if (listaPacientes is null)
+            {
+                throw new NoPudoLeerElArchivoException();
+            }
+            return listaPacientes;
         }
     }
 }
