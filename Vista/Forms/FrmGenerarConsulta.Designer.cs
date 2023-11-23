@@ -33,7 +33,7 @@
             btnAgregarConsulta = new Button();
             txtDescripcion = new TextBox();
             numIdPaciente = new NumericUpDown();
-            numericUpDown1 = new NumericUpDown();
+            numIdPractica = new NumericUpDown();
             lblDescripcion = new Label();
             lblIdPaciente = new Label();
             lblIdPractica = new Label();
@@ -44,7 +44,7 @@
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgrvPacientes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numIdPaciente).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numIdPractica).BeginInit();
             SuspendLayout();
             // 
             // dgrvConsultas
@@ -77,6 +77,7 @@
             btnAgregarConsulta.TabIndex = 2;
             btnAgregarConsulta.Text = "Agregar";
             btnAgregarConsulta.UseVisualStyleBackColor = true;
+            btnAgregarConsulta.Click += btnAgregarConsulta_Click;
             // 
             // txtDescripcion
             // 
@@ -95,15 +96,17 @@
             numIdPaciente.TabIndex = 4;
             numIdPaciente.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
-            // numericUpDown1
+            // numIdPractica
             // 
-            numericUpDown1.Location = new Point(99, 410);
-            numericUpDown1.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
-            numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(97, 23);
-            numericUpDown1.TabIndex = 5;
-            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numIdPractica.Location = new Point(99, 410);
+            numIdPractica.Maximum = new decimal(new int[] { 6, 0, 0, 0 });
+            numIdPractica.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numIdPractica.Name = "numIdPractica";
+            numIdPractica.Size = new Size(97, 23);
+            numIdPractica.TabIndex = 5;
+            numIdPractica.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numIdPractica.Enter += numIdPractica_Enter;
+            numIdPractica.Leave += numIdPractica_Leave;
             // 
             // lblDescripcion
             // 
@@ -189,7 +192,7 @@
             Controls.Add(lblIdPractica);
             Controls.Add(lblIdPaciente);
             Controls.Add(lblDescripcion);
-            Controls.Add(numericUpDown1);
+            Controls.Add(numIdPractica);
             Controls.Add(numIdPaciente);
             Controls.Add(txtDescripcion);
             Controls.Add(btnAgregarConsulta);
@@ -200,7 +203,7 @@
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgrvPacientes).EndInit();
             ((System.ComponentModel.ISupportInitialize)numIdPaciente).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numIdPractica).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -212,7 +215,7 @@
         private Button btnAgregarConsulta;
         private TextBox txtDescripcion;
         private NumericUpDown numIdPaciente;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numIdPractica;
         private Label lblDescripcion;
         private Label lblIdPaciente;
         private Label lblIdPractica;

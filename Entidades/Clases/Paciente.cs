@@ -122,5 +122,7 @@ namespace Entidades.Clases
             }
             return true;
         }
+
+        public static int GetMaxIdDePaciente(List<Paciente> list) => list[list.Count - 1].IDPaciente;
     }
 }

@@ -20,12 +20,15 @@ namespace Entidades.Clases
 
         private static string RutaArchivo = Path.Combine(".\\", "Consultas.json");
         public Consulta() { }
-        public Consulta(int id, string descripcion, int idPaciente, int idpractica)
+        public Consulta(string descripcion, int idPaciente, int idpractica)
         {
-            this.Id = id;
             this.Descripcion = descripcion;
             this.IdPractica = idpractica;
             this.IdPaciente = idPaciente;
+        }
+        public Consulta(int id, string descripcion, int idPaciente, int idpractica) : this(descripcion, idPaciente, idpractica)
+        {
+            this.Id = id;
         }
         
         public int Id { get => id; set => id = value; }
@@ -110,12 +113,31 @@ namespace Entidades.Clases
             }
             return suma;
         }
+
+        public static int PrecioTotalGastado(List<Consulta> list, List<Practica> practicas)
+        {
+            int suma = 0;
+            if (list is not null)
+            {
+                foreach (Consulta c in list)
+                {
+                    foreach (Practica p in practicas)
+                    {
+                        if (c.idPractica == p.IdPractica)
+                        {
+                            suma += p.Precio;
+                        }
+                    }
+                }
+            }
+            return suma;
+        }
         /// <summary>
         /// Guarda una lista de Consulta en Formato Json
         /// </summary>
         /// <param name="list">Lista tipo Consulta a guardar en archivo</param>
         /// <returns>true si pudo guardar el archivo</returns>
-        public static bool GuardarEnArchivoJson(List<Paciente> list)
+        public static bool GuardarEnArchivoJson(List<Consulta> list)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.WriteIndented = true;

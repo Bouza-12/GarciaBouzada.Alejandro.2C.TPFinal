@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelMenu = new Panel();
+            pictureBox1 = new PictureBox();
             button5 = new Button();
             button4 = new Button();
             btnGenerarConsultas = new Button();
@@ -37,11 +38,13 @@
             btnLogo = new Button();
             panelFormularioHijo = new Panel();
             panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.Indigo;
+            panelMenu.Controls.Add(pictureBox1);
             panelMenu.Controls.Add(button5);
             panelMenu.Controls.Add(button4);
             panelMenu.Controls.Add(btnGenerarConsultas);
@@ -53,6 +56,20 @@
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(200, 461);
             panelMenu.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Anchor = AnchorStyles.None;
+            pictureBox1.BackColor = Color.DarkViolet;
+            pictureBox1.Image = Properties.Resources._658c19712b2f9bb3c4aa4a6d02f223a8_icono_del_ojo_de_horus;
+            pictureBox1.InitialImage = Properties.Resources._658c19712b2f9bb3c4aa4a6d02f223a8_icono_del_ojo_de_horus;
+            pictureBox1.Location = new Point(59, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(83, 76);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // button5
             // 
@@ -138,6 +155,7 @@
             panelFormularioHijo.Name = "panelFormularioHijo";
             panelFormularioHijo.Size = new Size(684, 461);
             panelFormularioHijo.TabIndex = 2;
+            panelFormularioHijo.Paint += panelFormularioHijo_Paint;
             // 
             // MainMenu
             // 
@@ -152,6 +170,7 @@
             Text = "Menú Principal";
             Load += MainMenu_Load;
             panelMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -165,5 +184,6 @@
         private Button btnVerPacientes;
         private Button btnLogo;
         private Panel panelFormularioHijo;
+        private PictureBox pictureBox1;
     }
 }

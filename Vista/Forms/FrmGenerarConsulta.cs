@@ -56,5 +56,34 @@ namespace Vista.Forms
             this.listaConsultas = SQLConsulta.ObtenerTodasLasConsutlas();
             this.MostrarConsultas();
         }
+        /// <summary>
+        /// Agrega una consulta a la tabla Consulta de la Base de Datos TP2_2C_2023
+        /// </summary>
+        /// <param name="sender">boton de clic</param>
+        /// <param name="e">evento clic</param>
+        private void btnAgregarConsulta_Click(object sender, EventArgs e)
+        {
+            string descripcion = this.txtDescripcion.Text;
+            int idPaciente = (int)this.numIdPaciente.Value;
+            int idPractica = (int)this.numIdPractica.Value;
+            if (descripcion is not null && descripcion != string.Empty &&
+                idPaciente > 0 && idPaciente <= Paciente.GetMaxIdDePaciente(this.listaPaciente)
+                && idPractica > 0 && idPractica < 7)
+            {
+                Consulta c = new Consulta(descripcion, idPaciente, idPractica);
+                SQLConsulta.AgregarConsulta(c);
+                this.RefrescarGridViews();
+            }
+        }
+
+        private void numIdPractica_Enter(object sender, EventArgs e)
+        {
+            this.lblPracticasAyuda.Visible = true;
+        }
+
+        private void numIdPractica_Leave(object sender, EventArgs e)
+        {
+            this.lblPracticasAyuda.Visible = false;
+        }
     }
 }

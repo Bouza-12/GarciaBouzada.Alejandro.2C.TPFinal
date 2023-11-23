@@ -42,7 +42,7 @@ namespace Vista.Forms
             DateTime fechaNac = this.dateFechaNacimiento.Value;
             if (nombre is not null && nombre != string.Empty &&
                 apellido is not null && apellido != string.Empty &&
-                Paciente.ExistePacientePorDni(listaPacientes, dni))
+                !Paciente.ExistePacientePorDni(listaPacientes, dni))
             {
                 Paciente p = new Paciente(nombre, apellido, dni, fechaNac);
                 SQLPaciente.AgregarPaciente(p);

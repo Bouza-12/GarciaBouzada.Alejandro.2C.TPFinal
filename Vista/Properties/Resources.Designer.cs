@@ -63,6 +63,16 @@ namespace Vista.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _658c19712b2f9bb3c4aa4a6d02f223a8_icono_del_ojo_de_horus {
+            get {
+                object obj = ResourceManager.GetObject("658c19712b2f9bb3c4aa4a6d02f223a8-icono-del-ojo-de-horus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Hojo_De_Horus {
             get {
                 object obj = ResourceManager.GetObject("Hojo-De-Horus", resourceCulture);

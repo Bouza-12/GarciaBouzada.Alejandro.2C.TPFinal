@@ -69,5 +69,14 @@ namespace Entidades.Clases
         {
             return $"ID: {this.idPractica} => Practica: {this.practicaNombre}";
         }
+        public static int SumarPreciosDeUnaListaDePracticas(List<Practica> lista)
+        {
+            int sum = 0;
+            foreach(Practica p in lista)
+            {
+                sum += p.Precio;
+            }
+            return sum;
+        }
     }
 }

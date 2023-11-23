@@ -28,11 +28,12 @@ namespace Vista
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            listaPacientes = SQLPaciente.ObtenerTodasLosPacientes();
-            listaConsultas = SQLConsulta.ObtenerTodasLasConsutlas();
-            listaPracticas = SQLPractica.ObtenerTodasLasPracticas();
+            this.ActualizarListas();
         }
-
+        /// <summary>
+        /// Abre los Forms correspondiente al boton
+        /// </summary>
+        /// <param name="childForm"> El form que debe abrir</param>
         private void OpenChildForm(Form childForm)
         {
             //Revisar
@@ -53,38 +54,39 @@ namespace Vista
 
         private void btnVerPacientes_Click(object sender, EventArgs e)
         {
-            ActivarBoton(this.btnVerPacientes);
-            OpenChildForm(new FrmPacientes(listaPacientes));
+            this.ActivarBoton(this.btnVerPacientes);
+            this.OpenChildForm(new FrmPacientes(listaPacientes));
         }
 
         private void btnVerConsultas_Click(object sender, EventArgs e)
         {
-            ActivarBoton(this.btnVerConsultas);
-            OpenChildForm(new FrmVerConsultas(listaConsultas));
+            this.ActivarBoton(this.btnVerConsultas);
+            this.OpenChildForm(new FrmVerConsultas(listaConsultas, listaPracticas));
         }
 
 
         private void btnGenerarConsultas_Click(object sender, EventArgs e)
         {
-            ActivarBoton(this.btnGenerarConsultas);
-            OpenChildForm(new FrmGenerarConsulta(listaConsultas,listaPacientes));
+            this.ActivarBoton(this.btnGenerarConsultas);
+            this.OpenChildForm(new FrmGenerarConsulta(listaConsultas, listaPacientes));
         }
 
         private void btnLogo_Click(object sender, EventArgs e)
         {
-            currentChildForm.Close();
-            Inicio();
+            this.currentChildForm.Close();
+            this.Inicio();
         }
 
         private void Inicio()
         {
-            DesactivarBoton();
+            this.DesactivarBoton();
         }
         private void ActivarBoton(object senderBtn)
         {
             if (senderBtn is not null)
             {
-                DesactivarBoton();
+                this.DesactivarBoton();
+                this.ActualizarListas();
                 currentBtn = (Button)senderBtn;
                 currentBtn.BackColor = Color.Fuchsia;
                 currentBtn.ForeColor = Color.Black;
@@ -94,11 +96,29 @@ namespace Vista
 
         private void DesactivarBoton()
         {
-            if (currentBtn is not null)
+            if (this.currentBtn is not null)
             {
-                currentBtn.BackColor = Color.Indigo;
-                currentBtn.ForeColor = Color.Gainsboro;
+                this.currentBtn.BackColor = Color.Indigo;
+                this.currentBtn.ForeColor = Color.Gainsboro;
             }
+        }
+
+        private void ActualizarListas()
+        {
+            listaPacientes = SQLPaciente.ObtenerTodasLosPacientes();
+            listaConsultas = SQLConsulta.ObtenerTodasLasConsutlas();
+            listaPracticas = SQLPractica.ObtenerTodasLasPracticas();
+        }
+
+        private void panelFormularioHijo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.currentChildForm.Close();
+            this.Inicio();
         }
     }
 }

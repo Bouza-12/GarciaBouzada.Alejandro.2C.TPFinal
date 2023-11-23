@@ -151,7 +151,14 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error, no se pudo borrar", ex);
             }
         }
-        public static bool EditarPaciente(Consulta consulta,int id)
+        /// <summary>
+        /// Edita el registro de una consulta en una tabla (Consultas) de una BD (TP2_2C_2023)
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
+        public static bool EditarConsulta(Consulta consulta,int id)
         {
             try
             {

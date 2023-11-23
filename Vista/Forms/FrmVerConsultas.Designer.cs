@@ -31,11 +31,16 @@
             dgrvConsultas = new DataGridView();
             btnGuardarJson = new Button();
             lblTotalConsultas = new Label();
+            lblId = new Label();
+            numIdPaciente = new NumericUpDown();
+            btnCalcular = new Button();
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numIdPaciente).BeginInit();
             SuspendLayout();
             // 
             // dgrvConsultas
             // 
+            dgrvConsultas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgrvConsultas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgrvConsultas.Location = new Point(28, 39);
             dgrvConsultas.Name = "dgrvConsultas";
@@ -58,11 +63,39 @@
             // 
             lblTotalConsultas.AutoSize = true;
             lblTotalConsultas.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTotalConsultas.Location = new Point(478, 228);
+            lblTotalConsultas.Location = new Point(591, 248);
             lblTotalConsultas.Name = "lblTotalConsultas";
             lblTotalConsultas.Size = new Size(46, 19);
             lblTotalConsultas.TabIndex = 3;
             lblTotalConsultas.Text = "Total:";
+            lblTotalConsultas.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblId
+            // 
+            lblId.AutoSize = true;
+            lblId.Location = new Point(28, 252);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(21, 15);
+            lblId.TabIndex = 4;
+            lblId.Text = "ID:";
+            // 
+            // numIdPaciente
+            // 
+            numIdPaciente.Location = new Point(66, 250);
+            numIdPaciente.Name = "numIdPaciente";
+            numIdPaciente.Size = new Size(67, 23);
+            numIdPaciente.TabIndex = 5;
+            numIdPaciente.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // btnCalcular
+            // 
+            btnCalcular.Location = new Point(43, 292);
+            btnCalcular.Name = "btnCalcular";
+            btnCalcular.Size = new Size(90, 30);
+            btnCalcular.TabIndex = 6;
+            btnCalcular.Text = "Calcular";
+            btnCalcular.UseVisualStyleBackColor = true;
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // FrmVerConsultas
             // 
@@ -71,6 +104,9 @@
             BackColor = Color.SteelBlue;
             ClientSize = new Size(668, 445);
             ControlBox = false;
+            Controls.Add(btnCalcular);
+            Controls.Add(numIdPaciente);
+            Controls.Add(lblId);
             Controls.Add(lblTotalConsultas);
             Controls.Add(btnGuardarJson);
             Controls.Add(dgrvConsultas);
@@ -78,6 +114,7 @@
             StartPosition = FormStartPosition.WindowsDefaultBounds;
             Load += FrmVerConsultas_Load;
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numIdPaciente).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -87,5 +124,8 @@
         private DataGridView dgrvConsultas;
         private Button btnGuardarJson;
         private Label lblTotalConsultas;
+        private Label lblId;
+        private NumericUpDown numIdPaciente;
+        private Button btnCalcular;
     }
 }

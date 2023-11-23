@@ -118,10 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Hojo-De-Horus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hojo-De-Horus1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Hojo-De-Horus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hojo-De-Horus.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Hojo-De-Horus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Hojo-De-Horus1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="658c19712b2f9bb3c4aa4a6d02f223a8-icono-del-ojo-de-horus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\658c19712b2f9bb3c4aa4a6d02f223a8-icono-del-ojo-de-horus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
