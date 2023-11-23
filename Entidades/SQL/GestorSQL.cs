@@ -10,7 +10,9 @@ namespace Entidades.SQL
     public static class GestorSQL
     {
         internal static string stringConnection;
-
+        /// <summary>
+        /// conectarse a la database del servidor local
+        /// </summary>
         static GestorSQL()
         {
             GestorSQL.stringConnection = "Server=.;Database=TP2_2C_2023;Trusted_Connection=True;";

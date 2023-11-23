@@ -11,6 +11,12 @@ namespace Entidades.SQL
 {
     public class SQLConsulta
     {
+        /// <summary>
+        /// Devuelve un Objeto de tipo Consulta de una tabla sql
+        /// </summary>
+        /// <param name="id">id del objeto a devolver</param>
+        /// <returns>objeto de tipo Consulta</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static Consulta ObtenerConsultaPorId(int id)
         {
             try
@@ -46,7 +52,11 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error en la conexion a la Base de datos", ex);
             }
         }
-
+        /// <summary>
+        /// Devuelve una lista de tipo Consulta a partir de una tabla de una DB
+        /// </summary>
+        /// <returns>Lista de tipo Consulta</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static List<Consulta> ObtenerTodasLasConsutlas()
         {
             try
@@ -93,7 +103,12 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error en la conexion a la Base de datos", ex);
             }
         }
-
+        /// <summary>
+        /// Añade una nueva consulta a la tabla sql
+        /// </summary>
+        /// <param name="consulta"></param>
+        /// <returns>true si pudo agregar la conuslta, si no arroja una excepción</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static bool AgregarConsulta(Consulta consulta)
         {
             try

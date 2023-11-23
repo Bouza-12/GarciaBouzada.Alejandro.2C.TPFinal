@@ -64,7 +64,7 @@ namespace Entidades.Clases
         }
 
         public string RutaArchivo { get => Path.Combine(".\\", "Pacientes.json"); set => RutaArchivo = value; }
-
+        private static string RutaDelArchivo = Path.Combine(".\\", "Pacientes.json");
 
         public bool GuardarArchivoJson(List<Paciente> list)
         {
@@ -92,6 +92,35 @@ namespace Entidades.Clases
                 throw new NoPudoLeerElArchivoException();
             }
             return listaPacientes;
+        }
+
+        public static bool ExistePacientePorDni(List<Paciente> list, int dni)
+        {
+            foreach(Paciente p in list)
+            {
+                if(p.DNI == dni)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// Guarda una lista de Paciente en Formato Json
+        /// </summary>
+        /// <param name="list">Lista tipo Paciente a guardar en archivo</param>
+        /// <returns>true si pudo guardar el archivo</returns>
+        public static bool GuardarEnArchivoJson(List<Paciente> list)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+
+            using (StreamWriter sw = new StreamWriter(RutaDelArchivo))
+            {
+                string listaJson = JsonSerializer.Serialize(list, options);
+                sw.WriteLine(listaJson);
+            }
+            return true;
         }
     }
 }

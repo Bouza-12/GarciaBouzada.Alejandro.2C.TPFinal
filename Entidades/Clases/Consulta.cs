@@ -36,6 +36,11 @@ namespace Entidades.Clases
 
         string IArchivos<Consulta>.RutaArchivo { get => RutaArchivo; set => RutaArchivo = value; }
 
+        /// <summary>
+        /// Guarda una lista de Consulta en Formato Json
+        /// </summary>
+        /// <param name="list">Lista tipo Consulta a guardar en archivo</param>
+        /// <returns>true si pudo guardar el archivo</returns>
         public bool GuardarArchivoJson(List<Consulta> list)
         {
             JsonSerializerOptions options = new JsonSerializerOptions();
@@ -52,6 +57,11 @@ namespace Entidades.Clases
             return true;
         }
 
+        /// <summary>
+        /// Genera una Lista de Consulta a partir de un archivo Json - El archivo debe estar dentro de la carpeta determinada
+        /// </summary>
+        /// <returns>Lista de tipo Consulta con los registros del archivo .Json</returns>
+        /// <exception cref="NoPudoLeerElArchivoException"></exception>
         public List<Consulta> CargarArchivoJson()
         {           
             List<Consulta> listaConsultas = new List<Consulta>();
@@ -66,6 +76,7 @@ namespace Entidades.Clases
             }
             return listaConsultas;
         }
+
 
         public override string ToString()
         {
@@ -98,6 +109,23 @@ namespace Entidades.Clases
                 }
             }
             return suma;
+        }
+        /// <summary>
+        /// Guarda una lista de Consulta en Formato Json
+        /// </summary>
+        /// <param name="list">Lista tipo Consulta a guardar en archivo</param>
+        /// <returns>true si pudo guardar el archivo</returns>
+        public static bool GuardarEnArchivoJson(List<Paciente> list)
+        {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+
+            using (StreamWriter sw = new StreamWriter(RutaArchivo))
+            {
+                string listaJson = JsonSerializer.Serialize(list, options);
+                sw.WriteLine(listaJson);
+            }
+            return true;
         }
 
     }

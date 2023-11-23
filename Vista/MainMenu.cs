@@ -17,7 +17,7 @@ namespace Vista
     {
         private List<Practica> listaPracticas = new List<Practica>();
         private List<Paciente> listaPacientes = new List<Paciente>();
-        private List<Consulta> listaConsultas = new List<Consulta>();
+        protected List<Consulta> listaConsultas = new List<Consulta>();
         private Form currentChildForm;
         private Button currentBtn;
 

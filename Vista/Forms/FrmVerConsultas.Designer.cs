@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             dgrvConsultas = new DataGridView();
+            btnGuardarJson = new Button();
+            lblTotalConsultas = new Label();
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).BeginInit();
             SuspendLayout();
             // 
@@ -39,8 +41,28 @@
             dgrvConsultas.Name = "dgrvConsultas";
             dgrvConsultas.RowHeadersVisible = false;
             dgrvConsultas.RowTemplate.Height = 25;
-            dgrvConsultas.Size = new Size(474, 269);
+            dgrvConsultas.Size = new Size(609, 177);
             dgrvConsultas.TabIndex = 1;
+            // 
+            // btnGuardarJson
+            // 
+            btnGuardarJson.Location = new Point(566, 403);
+            btnGuardarJson.Name = "btnGuardarJson";
+            btnGuardarJson.Size = new Size(90, 30);
+            btnGuardarJson.TabIndex = 2;
+            btnGuardarJson.Text = "Guardar Json";
+            btnGuardarJson.UseVisualStyleBackColor = true;
+            btnGuardarJson.Click += btnGuardarJson_Click;
+            // 
+            // lblTotalConsultas
+            // 
+            lblTotalConsultas.AutoSize = true;
+            lblTotalConsultas.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTotalConsultas.Location = new Point(478, 228);
+            lblTotalConsultas.Name = "lblTotalConsultas";
+            lblTotalConsultas.Size = new Size(46, 19);
+            lblTotalConsultas.TabIndex = 3;
+            lblTotalConsultas.Text = "Total:";
             // 
             // FrmVerConsultas
             // 
@@ -49,16 +71,21 @@
             BackColor = Color.SteelBlue;
             ClientSize = new Size(668, 445);
             ControlBox = false;
+            Controls.Add(lblTotalConsultas);
+            Controls.Add(btnGuardarJson);
             Controls.Add(dgrvConsultas);
             Name = "FrmVerConsultas";
             StartPosition = FormStartPosition.WindowsDefaultBounds;
             Load += FrmVerConsultas_Load;
             ((System.ComponentModel.ISupportInitialize)dgrvConsultas).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private DataGridView dgrvConsultas;
+        private Button btnGuardarJson;
+        private Label lblTotalConsultas;
     }
 }

@@ -8,7 +8,10 @@ namespace Entidades.Excepciones
         public NoPudoLeerElArchivoException()
         {
         }
-
+        /// <summary>
+        /// No encontró el archivo para leer
+        /// </summary>
+        /// <param name="message">mensaje</param>
         public NoPudoLeerElArchivoException(string? message) : base(message)
         {
         }

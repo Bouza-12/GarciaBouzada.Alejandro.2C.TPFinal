@@ -11,6 +11,12 @@ namespace Entidades.SQL
 {
     public class SQLPractica
     {
+        /// <summary>
+        /// Retorna un objeto tipo Practica de una Tabla SQL
+        /// </summary>
+        /// <param name="id"></param>id dentro de la tabla
+        /// <returns>Un objeto tipo Persona</returns>
+        /// <exception cref="ErrorEnConcexionSQLException">Hubo un error en la conexión a la Base de Dato o la Tabla no existe</exception>
         public static Practica ObtenerPracticaPorId(int id)
         {
             try
@@ -45,6 +51,11 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error en la conexion a la Base de datos", ex);
             }
         }
+        /// <summary>
+        /// Extrae una lista de Practicas de una tabla SQL Srver
+        /// </summary>
+        /// <returns>Lista de tipo Practica</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static List<Practica> ObtenerTodasLasPracticas()
         {
             try
@@ -82,7 +93,12 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error en la conexion a la Base de datos", ex);
             }
         }
-
+        /// <summary>
+        /// Agrega una Practica a la tabla SQL
+        /// </summary>
+        /// <param name="practica">objeto tipo Practica</param> 
+        /// <returns>true si pudo agregar, sino arroja una excepcion</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static bool AgregarPracticas(Practica practica)
         {
             try
@@ -104,6 +120,12 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error, no se pudo agregar", ex);
             }
         }
+        /// <summary>
+        /// Elimina un registro de práctica dentro de la tabla sql
+        /// </summary>
+        /// <param name="id">int del id dentro de la tabla</param>
+        /// <returns>true si pudo agregar, sino arroja una excepcion</returns>
+        /// <exception cref="ErrorEnConcexionSQLException"></exception>
         public static bool BorrarPracticasPorId(int id)
         {
             try

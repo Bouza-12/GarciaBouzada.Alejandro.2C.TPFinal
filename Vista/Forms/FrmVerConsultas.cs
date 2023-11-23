@@ -29,5 +29,14 @@ namespace Vista.Forms
         {
             dgrvConsultas.DataSource = this.listaConsultas;
         }
+
+        private void btnGuardarJson_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Desea guardar la lista en un archivo Json?", "Guardar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                Consulta.GuardarEnArchivoJson(this.listaConsultas);
+            }
+        }
     }
 }
