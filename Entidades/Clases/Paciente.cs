@@ -137,6 +137,20 @@ namespace Entidades.Clases
             return false;
 
         }
+        public static Paciente GetPacientePorId(List<Paciente> list, int id)
+        {
+            if(list is not null)
+            {
+                foreach( Paciente p in list)
+                {
+                    if (p.idPaciente == id)
+                    {
+                        return p;
+                    }
+                }
+            }
+            return null;
+        }
 
         public static int GetMaxIdDePaciente(List<Paciente> list) => list[list.Count - 1].IDPaciente;
  

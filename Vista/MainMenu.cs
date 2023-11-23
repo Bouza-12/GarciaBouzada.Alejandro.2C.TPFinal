@@ -61,7 +61,7 @@ namespace Vista
         private void btnVerConsultas_Click(object sender, EventArgs e)
         {
             this.ActivarBoton(this.btnVerConsultas);
-            this.OpenChildForm(new FrmVerConsultas(listaConsultas, listaPracticas));
+            this.OpenChildForm(new FrmVerConsultas(listaConsultas, listaPracticas, listaPacientes));
         }
 
 

@@ -15,17 +15,20 @@ namespace Vista.Forms
     {
         private List<Consulta> listaConsultas;
         private List<Practica> listaPracticas;
-        public FrmVerConsultas(List<Consulta> listaConsultas, List<Practica> listaPracticas)
+        private List<Paciente> listaPacientes;
+        public FrmVerConsultas(List<Consulta> listaConsultas, List<Practica> listaPracticas,List<Paciente> listaPacientes)
         {
             InitializeComponent();
             this.listaConsultas = listaConsultas;
             this.listaPracticas = listaPracticas;
+            this.listaPacientes = listaPacientes;
+            this.lblNombre.Text = string.Empty;
         }
 
         private void FrmVerConsultas_Load(object sender, EventArgs e)
         {
             this.MostrarConsultas();
-            this.CalcularLblTotal(listaConsultas, listaPracticas, 0);
+            this.CalcularLblTotal(listaConsultas, listaPracticas, 0, listaPacientes);
         }
 
         private void MostrarConsultas()
@@ -42,31 +45,34 @@ namespace Vista.Forms
             }
         }
 
-        private void CalcularLblTotal(List<Consulta> listaConsultas, List<Practica> listaPreacticas, int id)
+        private void CalcularLblTotal(List<Consulta> listaConsultas, List<Practica> listaPreacticas, int id, List<Paciente> pacientes)
         {
             int total = 0;
             if (id == 0)
             {
                 total = Consulta.PrecioTotalGastado(listaConsultas, listaPreacticas);
+                this.lblNombre.Text = string.Empty;
             }
             else
             {
                 total = Consulta.PrecioTotalGastadoPorPersonaPorId(listaConsultas, listaPreacticas, id);
+                Paciente p = Paciente.GetPacientePorId(pacientes, id);
+                this.lblNombre.Text = p.NombreCompleto;
             }
             lblTotalConsultas.Text = $"Total: ${total}";
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            int idIngresado = (int) this.numIdPaciente.Value;
+            int idIngresado = (int)this.numIdPaciente.Value;
             int MaxId = this.listaConsultas[listaConsultas.Count - 1].Id;
-            if(idIngresado == 0 || idIngresado >MaxId) 
+            if (idIngresado == 0 || idIngresado > MaxId)
             {
-                this.CalcularLblTotal(listaConsultas, listaPracticas, 0);
+                this.CalcularLblTotal(listaConsultas, listaPracticas, 0, listaPacientes);
             }
             else
             {
-                this.CalcularLblTotal(listaConsultas, listaPracticas, idIngresado);
+                this.CalcularLblTotal(listaConsultas, listaPracticas, idIngresado, listaPacientes);
             }
         }
     }

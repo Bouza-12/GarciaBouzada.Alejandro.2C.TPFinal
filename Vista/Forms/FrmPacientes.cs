@@ -70,7 +70,7 @@ namespace Vista.Forms
             DialogResult result = MessageBox.Show("Desea guardar la lista en un archivo Json?","Guardar",MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if(result == DialogResult.OK)
             {
-                Paciente.GuardarEnArchivoJson(this.listaPacientes)                
+                Paciente.GuardarEnArchivoJson(this.listaPacientes);           
             }
         }
 
