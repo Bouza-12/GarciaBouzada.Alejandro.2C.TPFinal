@@ -3,17 +3,24 @@ using Entidades.Excepciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Entidades.Clases 
 {
+    public  delegate void DelegadoGuardarArchivo(string mensaje);
     public class Paciente : Persona, IArchivos<Paciente>
     {
+        //Evento
+        public static event DelegadoGuardarArchivo OnGuardarArchivoEnJson;
+        //Campos
         private int idPaciente;
         private DateTime? fechaNacimiento;
 
+        //Atributos
         public int IDPaciente
         {
             get { return idPaciente; }
@@ -24,8 +31,6 @@ namespace Entidades.Clases
             get => fechaNacimiento.Value;
             set => fechaNacimiento = value;
         }
-
-
         public int Edad
         {
             get
@@ -48,6 +53,7 @@ namespace Entidades.Clases
                 }
             }
         }
+        //Constructores
         public Paciente () : base()
         {
 
@@ -58,6 +64,7 @@ namespace Entidades.Clases
             this.fechaNacimiento = fechaNacimiento;
         }
 
+        //Metodos
         public override string ToString()
         {
             return $"ID: {this.idPaciente} => {this.NombreCompleto}, Edad: {this.Edad}";
@@ -112,17 +119,26 @@ namespace Entidades.Clases
         /// <returns>true si pudo guardar el archivo</returns>
         public static bool GuardarEnArchivoJson(List<Paciente> list)
         {
-            JsonSerializerOptions options = new JsonSerializerOptions();
-            options.WriteIndented = true;
-
-            using (StreamWriter sw = new StreamWriter(RutaDelArchivo))
+            if(list is not null)
             {
-                string listaJson = JsonSerializer.Serialize(list, options);
-                sw.WriteLine(listaJson);
+                Thread.Sleep(1000);
+                JsonSerializerOptions options = new JsonSerializerOptions();
+                options.WriteIndented = true;
+
+                using (StreamWriter sw = new StreamWriter(RutaDelArchivo))
+                {
+                    string listaJson = JsonSerializer.Serialize(list, options);
+                    sw.WriteLine(listaJson);
+                }
+                Paciente.OnGuardarArchivoEnJson.Invoke("Se Guardó correctamente");
+                return true;
             }
-            return true;
+            Paciente.OnGuardarArchivoEnJson.Invoke("No se pudo guardar el archivo");
+            return false;
+
         }
 
         public static int GetMaxIdDePaciente(List<Paciente> list) => list[list.Count - 1].IDPaciente;
+ 
     }
 }

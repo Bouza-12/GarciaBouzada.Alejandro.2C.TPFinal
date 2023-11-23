@@ -14,11 +14,15 @@ namespace Vista.Forms
 {
     public partial class FrmPacientes : Form
     {
-        List<Paciente> listaPacientes;
+        private List<Paciente> listaPacientes = new List<Paciente>();
+        
+        
         public FrmPacientes(List<Paciente> listaPacientes)
         {
             InitializeComponent();
             this.listaPacientes = listaPacientes;
+            Paciente.OnGuardarArchivoEnJson += this.MostrarGuardadoOK;
+
         }
 
         private void FrmPacientes_Load(object sender, EventArgs e)
@@ -48,6 +52,10 @@ namespace Vista.Forms
                 SQLPaciente.AgregarPaciente(p);
                 this.RefrescarGridViewPacientes();
             }
+            else
+            {
+                MessageBox.Show("No se pudo Agregar al Paciente", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //puede ser hilo
@@ -62,8 +70,13 @@ namespace Vista.Forms
             DialogResult result = MessageBox.Show("Desea guardar la lista en un archivo Json?","Guardar",MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if(result == DialogResult.OK)
             {
-                Paciente.GuardarEnArchivoJson(this.listaPacientes);
+                Paciente.GuardarEnArchivoJson(this.listaPacientes)                
             }
+        }
+
+        private void MostrarGuardadoOK(string mensaje)
+        {
+            MessageBox.Show(mensaje, "Guardado");
         }
     }
 }
