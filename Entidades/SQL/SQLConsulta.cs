@@ -54,7 +54,7 @@ namespace Entidades.SQL
                 List<Consulta> consultas = new List<Consulta>();
                 using (SqlConnection connection = new SqlConnection(GestorSQL.stringConnection))
                 {
-                    string query = "SELECT * FROM Pacientes;";
+                    string query = "SELECT * FROM Consultas;";
                     SqlCommand command = new SqlCommand(query, connection);
 
 
@@ -66,7 +66,14 @@ namespace Entidades.SQL
                         {
                             Consulta p = new Consulta();
                             p.Id = reader.GetInt32(0);
-                            p.Descripcion = reader.GetString(1);
+                            if(reader.GetString(1) is  not null)
+                            {
+                                p.Descripcion = reader.GetString(1);
+                            }
+                            else
+                            {
+                                p.Descripcion = string.Empty;
+                            }
                             p.IdPaciente = reader.GetInt32(2);
                             p.IdPractica = reader.GetInt32(3);
                             

@@ -8,6 +8,8 @@ namespace Entidades.Archivos
 {
     public interface IArchivos<T> where T : class
     {
+        
+
         string RutaArchivo { get; set; }
         public bool GuardarArchivoJson(List<T> list);
         public List<T> CargarArchivoJson();

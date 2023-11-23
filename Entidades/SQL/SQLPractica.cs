@@ -11,7 +11,7 @@ namespace Entidades.SQL
 {
     public class SQLPractica
     {
-        public static Practica ObtenerPrácticaPorId(int id)
+        public static Practica ObtenerPracticaPorId(int id)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Entidades.SQL
                         Practica p = new Practica ();
                         p.IdPractica = reader.GetInt32(0);
                         p.PracticaNombre = reader.GetString(1);
-                        p.Precio = reader.GetInt32(2);
+                        p.Precio = (int)reader.GetDouble(2);
                         return p;
                     }
                     else
@@ -45,15 +45,14 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error en la conexion a la Base de datos", ex);
             }
         }
-
-        public static List<Paciente> ObtenerTodasLosPacientes()
+        public static List<Practica> ObtenerTodasLasPracticas()
         {
             try
             {
-                List<Paciente> pacientes = new List<Paciente>();
+                List<Practica> practicas = new List<Practica>();
                 using (SqlConnection connection = new SqlConnection(GestorSQL.stringConnection))
                 {
-                    string query = "SELECT * FROM Pacientes;";
+                    string query = "SELECT * FROM Practicas";
                     SqlCommand command = new SqlCommand(query, connection);
 
 
@@ -61,24 +60,22 @@ namespace Entidades.SQL
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        while (reader.Read())
+                        while(reader.Read())
                         {
-                            Paciente p = new Paciente();
-                            p.IDPaciente = reader.GetInt32(0);
-                            p.Nombre = reader.GetString(1);
-                            p.Apellido = reader.GetString(2);
-                            p.DNI = reader.GetInt32(3);
-                            p.FechaNacimiento = reader.GetDateTime(4);
-                            pacientes.Add(p);
+                            Practica p = new Practica();
+                            p.IdPractica = reader.GetInt32(0);
+                            p.PracticaNombre = reader.GetString(1);
+                            p.Precio = (int)reader.GetDouble(2);
+                            practicas.Add(p);
                         }
                     }
                     else
                     {
-                        throw new ErrorEnConcexionSQLException("No encontro Paciente");
+                        throw new ErrorEnConcexionSQLException("No encontro Practica");
                     }
 
                 }
-                return pacientes;
+                return practicas;
             }
             catch (Exception ex)
             {
@@ -86,20 +83,17 @@ namespace Entidades.SQL
             }
         }
 
-        public static bool AgregarPaciente(Paciente paciente)
+        public static bool AgregarPracticas(Practica practica)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(GestorSQL.stringConnection))
                 {
-                    string query = "INSERT INTO Pacientes (nombre, apellido, dni, fechaNacimiento)" +
-                        "values(@nombre, @apellido, @dni, @fechaNac)";
+                    string query = "INSERT INTO Practicas (practica, precio)" +
+                        "values(@nombre, @precio)";
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("nombre", paciente.Nombre);
-                    command.Parameters.AddWithValue("apellido", paciente.Apellido);
-                    command.Parameters.AddWithValue("dni", paciente.DNI);
-                    command.Parameters.AddWithValue("fechaNac", paciente.FechaNacimiento);
-
+                    command.Parameters.AddWithValue("nombre", practica.PracticaNombre);
+                    command.Parameters.AddWithValue("precio", practica.Precio);
                     connection.Open();
                     command.ExecuteNonQuery();
                     return true;
@@ -110,13 +104,13 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error, no se pudo agregar", ex);
             }
         }
-        public static bool BorrarPaciente(int id)
+        public static bool BorrarPracticasPorId(int id)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(GestorSQL.stringConnection))
                 {
-                    string query = "DELETE FROM Pacientes WHERE idPaciente = @id";
+                    string query = "DELETE FROM Practicas WHERE idPractica = @id";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("id", id);
 
@@ -130,20 +124,17 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error, no se pudo borrar", ex);
             }
         }
-        public static bool EditarPaciente(Paciente paciente,int id)
+        public static bool EditarPracticaPorId(Practica practica, int id)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(GestorSQL.stringConnection))
                 {
-                    string query = "UPDATE Pacientes set nombre= @nombre, apellido = @apellido, dni = @dni, fechaNacimiento = @fechaNac WHERE idPaciente = @id";
+                    string query = "UPDATE Pacientes set practica= @nombre, precio = @precio WHERE idPractica = @id";
                     SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("id", id);
-                    command.Parameters.AddWithValue("nombre", paciente.Nombre);
-                    command.Parameters.AddWithValue("apellido", paciente.Apellido);
-                    command.Parameters.AddWithValue("dni", paciente.DNI);
-                    command.Parameters.AddWithValue("fechaNac", paciente.FechaNacimiento);
-
+                    command.Parameters.AddWithValue("nombre", practica.PracticaNombre);
+                    command.Parameters.AddWithValue("precio", practica.Precio);
                     connection.Open();
                     command.ExecuteNonQuery();
                     return true;
@@ -154,5 +145,6 @@ namespace Entidades.SQL
                 throw new ErrorEnConcexionSQLException("Error, no se pudo editar la persona", ex);
             }
         }
+
     }
 }

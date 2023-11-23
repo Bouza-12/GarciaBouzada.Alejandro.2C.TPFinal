@@ -15,7 +15,7 @@ namespace Entidades.Clases
         private static Dictionary<EPracticas, double> practicas;
 
         private int idPractica;
-        private double precio;
+        private int precio;
         private string practicaNombre;
 
         static Practica()
@@ -27,14 +27,14 @@ namespace Entidades.Clases
 
         }
 
-        public Practica(EPracticas practica, double precio)
+        public Practica(EPracticas practica, int precio)
         {
             this.practicaNombre = practica.ToString();
             this.precio = precio;
         }
 
         public string PracticaNombre { get => practicaNombre; set => practicaNombre = value; }
-        public double Precio { get => precio; set => precio = value; }
+        public int Precio { get => precio; set => precio = value; }
         public int IdPractica { get => idPractica; set => idPractica = value; }
         public string RutaArchivo { get => Path.Combine(".\\", "Practicas.json"); set => RutaArchivo = value; }
 
@@ -64,6 +64,10 @@ namespace Entidades.Clases
                 sw.WriteLine(listaJson);
             }
             return true;
+        }
+        public override string ToString()
+        {
+            return $"ID: {this.idPractica} => Practica: {this.practicaNombre}";
         }
     }
 }

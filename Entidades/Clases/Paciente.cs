@@ -63,7 +63,7 @@ namespace Entidades.Clases
             return $"ID: {this.idPaciente} => {this.NombreCompleto}, Edad: {this.Edad}";
         }
 
-        public static string RutaArchivo { get => Path.Combine(".\\", "Pacientes.json"); set => RutaArchivo = value; }
+        public string RutaArchivo { get => Path.Combine(".\\", "Pacientes.json"); set => RutaArchivo = value; }
 
 
         public bool GuardarArchivoJson(List<Paciente> list)

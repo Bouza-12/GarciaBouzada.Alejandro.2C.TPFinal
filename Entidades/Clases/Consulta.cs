@@ -7,6 +7,7 @@ using System.IO;
 using Entidades.Archivos;
 using System.Text.Json;
 using Entidades.Excepciones;
+using Entidades.Extensiones;
 
 namespace Entidades.Clases 
 {
@@ -64,6 +65,39 @@ namespace Entidades.Clases
                 throw new NoPudoLeerElArchivoException();
             }
             return listaConsultas;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {id} => Descripcion: {this.Descripcion}";
+        }
+        /// <summary>
+        /// Devuelve el total gastado por un IdPaciente
+        /// </summary>
+        /// <param name="list"></param> Lista de Consultas
+        /// <param name="practicas"></param> Lista de Prácticas
+        /// <param name="idPaciente"></param> Paciente que se quiere buscar
+        /// <returns>La suma de los precios asociados a las practicas por ese id</returns>
+        public static int PrecioTotalGastadoPorPersonaPorId(List<Consulta> list,List<Practica> practicas ,int idPaciente)
+        {
+            int suma = 0;
+            if(list is not null)
+            {
+                foreach(Consulta c in list)
+                {
+                    if(c.idPaciente == idPaciente)
+                    {
+                        foreach (Practica p in practicas)
+                        {
+                            if (c.idPractica == p.IdPractica)
+                            {
+                                suma += p.Precio;
+                            }
+                        }
+                    }
+                }
+            }
+            return suma;
         }
 
     }
