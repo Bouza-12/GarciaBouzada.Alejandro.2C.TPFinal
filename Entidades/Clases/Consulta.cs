@@ -113,7 +113,12 @@ namespace Entidades.Clases
             }
             return suma;
         }
-
+        /// <summary>
+        /// Suma de los precios de la Practicas de todas las consultas
+        /// </summary>
+        /// <param name="list">lista de tipo Consulta</param>
+        /// <param name="practicas"> lista de tipo Practica</param>
+        /// <returns>La suma</returns>
         public static int PrecioTotalGastado(List<Consulta> list, List<Practica> practicas)
         {
             int suma = 0;
